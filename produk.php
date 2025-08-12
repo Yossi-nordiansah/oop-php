@@ -9,23 +9,23 @@ class Produk {
           $penulis,
           $penerbit,
           $harga;
+
+    public function __construct($judul = "-", $penulis = "-", $penerbit = "-", $harga="-")
+    {
+        $this->judul = $judul;
+        $this->penulis = $penulis;
+        $this->penerbit = $penerbit;
+        $this->harga = $harga;
+    }
     
     public function getLabel(){
         return "$this->penulis, $this->penerbit";
     }
 }
 
-$produk1 = new Produk();
-$produk1-> judul = "Naruto";
-$produk1-> penulis = "Masashi Kishimoto";
-$produk1-> penerbit = 'Shonen Jump';
-$produk1-> harga = 30000;
+$produk1 = new Produk("Naruto", "Masashi Kishimoto", "Elex Media Komputindo", 35000);
+$produk2 = new Produk("Uncharted", "Neil Druckman", "Sony Komputer");
 
-$produk2 = new Produk();
-$produk2-> judul = "Uncharted";
-$produk2-> penulis = "Neil Druckman";
-$produk2-> penerbit = 'Sony Computer';
-$produk2-> harga = 250000;
 
 echo $produk1->getLabel();
 echo  "<hr>";
