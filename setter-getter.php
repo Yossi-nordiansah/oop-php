@@ -6,11 +6,12 @@
 
 class Produk
 {
-    public $judul,
+    private $judul,
         $penulis,
-        $penerbit;
-    protected $diskon;
-    private $harga;
+        $penerbit,
+        $harga,
+        $diskon;
+
     public function __construct($judul = "-", $penulis = "-", $penerbit = "-", $harga = "-")
     {
         $this->judul = $judul;
@@ -24,16 +25,70 @@ class Produk
         return "$this->penulis, $this->penerbit";
     }
 
+    public function getInfoProduk()
+    {
+        $str = "{$this->judul} | {$this->penulis}, {$this->penerbit} (Rp. {$this->harga})";
+        return $str;
+    }
+
+    public function getJudul()
+    {
+        return $this->judul;
+    }
+
+    public function setJudul($judul)
+    {
+        if (!is_string($judul)) {
+            throw new Exception("judul harus string");
+        }
+        $this->judul = $judul;
+    }
+
     public function getHarga()
     {
         $hargaAkhir = $this->harga - ($this->harga * $this->diskon / 100);
         return "Rp. " . $hargaAkhir;
     }
 
-    public function getInfoProduk()
+    public function setHarga($harga)
     {
-        $str = "{$this->judul} | {$this->penulis}, {$this->penerbit} (Rp. {$this->harga})";
-        return $str;
+        $this->harga = $harga;
+    }
+
+    public function getPenulis()
+    {
+        return $this->penulis;
+    }
+
+    public function setPenulis($penulis)
+    {
+        if (!is_string($penulis)) {
+            throw new Exception("penulis harus string");
+        }
+        $this->penulis = $penulis;
+    }
+
+    public function getPenerbit()
+    {
+        return $this->penerbit;
+    }
+
+    public function setPenerbit($penerbit)
+    {
+        if (!is_string($penerbit)) {
+            throw new Exception("penerbit harus string");
+        }
+        $this->penerbit = $penerbit;
+    }
+
+      public function setDiskon($diskon)
+    {
+        $this->diskon = $diskon;
+    }
+
+      public function getDiskon($diskon)
+    {
+        return $this->diskon = $diskon;
     }
 }
 
@@ -44,11 +99,6 @@ class Komik extends Produk
     {
         parent::__construct($judul, $penulis, $penerbit, $harga);
         $this->jmlHalaman = $jmlHalaman;
-    }
-
-    public function setDiskon($diskon)
-    {
-        $this->diskon = $diskon;
     }
 
     public function getInfoProduk()
@@ -66,10 +116,7 @@ class Game extends Produk
         parent::__construct($judul, $penulis, $penerbit, $harga);
         $this->waktuMain = $waktuMain;
     }
-    public function setDiskon($diskon)
-    {
-        $this->diskon = $diskon;
-    }
+
     public function getInfoProduk()
     {
         $str = "Game : " . parent::getInfoProduk() . " ~ {$this->waktuMain} Jam.";
@@ -84,7 +131,7 @@ $produk2 = new Game("Uncharted", "Neil Druckman", "Sony Komputer", 500000, 50);
 echo $produk1->getLabel();
 echo  "<hr>";
 echo $produk2->getLabel();
-echo "<br>"; 
+echo "<br>";
 echo "<br>";
 echo $produk1->getInfoProduk();
 echo "<br>";
@@ -92,6 +139,9 @@ echo $produk2->getInfoProduk();
 echo  "<hr>";
 $produk1->setDiskon(10);
 echo $produk1->getHarga();
-echo  "<hr>";
+echo  "<br>";
 $produk2->setDiskon(10);
 echo $produk2->getHarga();
+echo  "<hr>";
+$produk1->setJudul("Boruto");
+echo $produk1->getPenerbit();
